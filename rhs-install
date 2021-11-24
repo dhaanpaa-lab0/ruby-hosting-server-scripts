@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+INSTALL_BIN=/opt/ruby-hosting-server/bin
+mkdir -pv $INSTALL_BIN
+cp -v rhs-* $INSTALL_BIN
+chmod -v a+x $INSTALL_BIN/*
+
+if [ ! -f /etc/profile.d/ruby-hosting-server-sysinstall.sh ]; then
+    cat << PROFILE_SET > /etc/profile.d/ruby-hosting-server-sysinstall.sh
+#!/usr/bin/env bash
+PATH=\$PATH:$INSTALL_BIN
+export PATH
+PROFILE_SET
+    chmod a+x /etc/profile.d/ruby-hosting-server-sysinstall.sh
+fi
